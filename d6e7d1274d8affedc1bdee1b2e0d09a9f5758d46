@@ -1,0 +1,27 @@
+internal/providers/provider_test.go
+  18186fc33ce1cb8d 4,6-7,10-41,45-67,69-75,77-78,84-92,95-96,98,105-107,110-111,113-114,116-117,121-127,130,132-144,146-149,153,158,167-177,179-190,192-199,205-229,232-234,237-260,263-267,271-273,275-277,283-293,295-298,312-313,316-343,346-348,350-352,356-361,363-364,367-369
+internal/validator/validator_test.go
+  18186fc33ce1cb8d 4,7,55-67,77-87,103-108,133-145,148-152,154,172-200,207-212,237,239-240,245-255,264-267,281-282,285-286,288-289,292-328,330-332
+.gitignore
+  18186fc33ce1cb8d 46-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "d6e7d1274d8affedc1bdee1b2e0d09a9f5758d46",
+  "prompts": {
+    "18186fc33ce1cb8d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "69947737-4e97-4c06-9861-ea1b9bec9b9a",
+        "model": "accounts/fireworks/models/kimi-k2p5"
+      },
+      "human_author": "stuckinforloop <device.neel@gmail.com>",
+      "messages": [],
+      "total_additions": 538,
+      "total_deletions": 225,
+      "accepted_lines": 425,
+      "overriden_lines": 0
+    }
+  }
+}
