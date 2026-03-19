@@ -1,0 +1,23 @@
+.goreleaser.yml
+  c6b2998ab567d3af 1-2,25-26,34-35,43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "afb965d01fe53d2b849af231bafacc9347500d7f",
+  "prompts": {
+    "c6b2998ab567d3af": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "01995061-94c0-4a5b-9176-6dea40469669",
+        "model": "gpt-5.3-codex-xhigh-fast"
+      },
+      "human_author": "stuckinforloop <device.neel@gmail.com>",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 4,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    }
+  }
+}
