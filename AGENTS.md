@@ -9,7 +9,7 @@ A Go-based CLI tool for managing LLM provider configurations across multiple age
 ### Project Structure
 ```
 llmconf/
-├── cmd/llmconf/main.go          # Entry point
+├── main.go                      # Entry point (root for go install)
 ├── internal/
 │   ├── cli/                      # Cobra CLI commands
 │   ├── config/                   # Configuration management

@@ -1,0 +1,77 @@
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: llmconf
+    main: .
+    binary: llmconf
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X github.com/stuckinforloop/llmconf/internal/version.Version={{.Version}}
+
+archives:
+  - id: llmconf
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else }}{{ .Arch }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: 'checksums.txt'
+
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "merge conflict"
+      - Merge pull request
+      - Merge remote-tracking branch
+      - Merge branch
+      - go mod tidy
+  groups:
+    - title: Dependency updates
+      regexp: '^.*?(.+)(deps)!?:.+$'
+      order: 300
+    - title: "New Features"
+      regexp: '^.*?feat(\.+)??!?:.+$'
+      order: 100
+    - title: "Security updates"
+      regexp: '^.*?sec(\.+)??!?:.+$'
+      order: 150
+    - title: "Bug fixes"
+      regexp: '^.*?fix(\.+)??!?:.+$'
+      order: 200
+    - title: "Documentation updates"
+      regexp: '^.*?docs(\.+)??!?:.+$'
+      order: 400
+    - title: "Build process updates"
+      regexp: '^.*?build(\.+)??!?:.+$'
+      order: 400
+    - title: Other work
+      order: 9999
+
+release:
+  disable: false
+  skip_upload: false

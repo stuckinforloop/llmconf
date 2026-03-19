@@ -12,11 +12,33 @@ A Go-based CLI tool for managing LLM provider configurations across multiple age
 
 ## Installation
 
-```bash
-# Using go install
-go install github.com/stuckinforloop/llmconf/cmd/llmconf@latest
+### Using go install (requires Go installed)
 
-# Or build from source
+```bash
+go install github.com/stuckinforloop/llmconf@latest
+```
+
+### Using pre-built binaries
+
+Download from the [releases page](https://github.com/stuckinforloop/llmconf/releases):
+
+```bash
+# macOS (ARM64)
+curl -L https://github.com/stuckinforloop/llmconf/releases/latest/download/llmconf_Darwin_arm64.tar.gz | tar xz
+
+# macOS (Intel)
+curl -L https://github.com/stuckinforloop/llmconf/releases/latest/download/llmconf_Darwin_x86_64.tar.gz | tar xz
+
+# Linux
+curl -L https://github.com/stuckinforloop/llmconf/releases/latest/download/llmconf_Linux_x86_64.tar.gz | tar xz
+
+# Move to PATH
+mv llmconf /usr/local/bin/
+```
+
+### Build from source
+
+```bash
 git clone https://github.com/stuckinforloop/llmconf.git
 cd llmconf
 make build
