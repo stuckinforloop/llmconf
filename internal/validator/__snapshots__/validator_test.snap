@@ -1,0 +1,271 @@
+
+[TestValidateProviderConfig/valid_anthropic - 1]
+valid anthropic
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/invalid_anthropic_-_missing_key - 1]
+invalid anthropic - missing key
+{
+  "Valid": false,
+  "Errors": [
+    "ANTHROPIC_API_KEY is required"
+  ],
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/valid_bedrock_with_sso - 1]
+valid bedrock with sso
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/valid_bedrock_with_api_key - 1]
+valid bedrock with api key
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/invalid_bedrock_-_missing_region - 1]
+invalid bedrock - missing region
+{
+  "Valid": false,
+  "Errors": [
+    "AWS_REGION is required"
+  ],
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/bedrock_with_no_auth_method - 1]
+bedrock with no auth method
+{
+  "Valid": false,
+  "Errors": [
+    "at least one authentication method is required (SSO profile, access keys, or bearer token)"
+  ],
+  "Warnings": null
+}
+---
+
+[TestValidateProviderConfig/unknown_provider - 1]
+unknown provider
+{
+  "Valid": false,
+  "Errors": [
+    "Unknown provider: unknown"
+  ],
+  "Warnings": null
+}
+---
+
+[TestValidateSettings/valid_bedrock_settings - 1]
+valid bedrock settings
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": null
+}
+---
+
+[TestValidateSettings/valid_fireworks_settings - 1]
+valid fireworks settings
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": [
+    "No active provider detected in settings"
+  ]
+}
+---
+
+[TestValidateSettings/missing_env_map - 1]
+missing env map
+{
+  "Valid": false,
+  "Errors": [
+    "Environment variables not initialized"
+  ],
+  "Warnings": null
+}
+---
+
+[TestValidateSettings/empty_settings_-_no_provider - 1]
+empty settings - no provider
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": [
+    "No active provider detected in settings"
+  ]
+}
+---
+
+[TestValidateSettings/anthropic_direct_api_settings - 1]
+anthropic direct api settings
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": null
+}
+---
+
+[TestValidateSettings/vertex_ai_settings - 1]
+vertex ai settings
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": [
+    "No active provider detected in settings"
+  ]
+}
+---
+
+[TestValidateSettings/litellm_settings - 1]
+litellm settings
+{
+  "Valid": true,
+  "Errors": null,
+  "Warnings": [
+    "Model pinning is strongly recommended for LiteLLM Proxy"
+  ]
+}
+---
+
+[TestValidateEnvVarName - 1]
+env_var_validation
+{
+  "invalid contains hyphen": {
+    "error": "environment variable name contains invalid character: -",
+    "valid": false,
+    "varName": "API-KEY"
+  },
+  "invalid contains space": {
+    "error": "environment variable name contains invalid character:  ",
+    "valid": false,
+    "varName": "API KEY"
+  },
+  "invalid contains special": {
+    "error": "environment variable name contains invalid character: $",
+    "valid": false,
+    "varName": "API$KEY"
+  },
+  "invalid empty": {
+    "error": "environment variable name cannot be empty",
+    "valid": false,
+    "varName": ""
+  },
+  "invalid starts number": {
+    "error": "environment variable name must start with a letter or underscore",
+    "valid": false,
+    "varName": "1API_KEY"
+  },
+  "valid lowercase": {
+    "valid": true,
+    "varName": "api_key"
+  },
+  "valid starts underscore": {
+    "valid": true,
+    "varName": "_API_KEY"
+  },
+  "valid uppercase": {
+    "valid": true,
+    "varName": "API_KEY"
+  },
+  "valid with numbers": {
+    "valid": true,
+    "varName": "API_KEY_123"
+  }
+}
+---
+
+[TestIsSensitiveVar - 1]
+sensitive_var_detection
+{
+  "api key": {
+    "sensitive": true,
+    "varName": "ANTHROPIC_API_KEY"
+  },
+  "auth": {
+    "sensitive": true,
+    "varName": "AUTH_TOKEN"
+  },
+  "base url": {
+    "sensitive": false,
+    "varName": "ANTHROPIC_BASE_URL"
+  },
+  "credential": {
+    "sensitive": true,
+    "varName": "CREDENTIAL"
+  },
+  "endpoint": {
+    "sensitive": false,
+    "varName": "API_ENDPOINT"
+  },
+  "password": {
+    "sensitive": true,
+    "varName": "DB_PASSWORD"
+  },
+  "private key": {
+    "sensitive": true,
+    "varName": "PRIVATE_KEY"
+  },
+  "profile": {
+    "sensitive": false,
+    "varName": "AWS_PROFILE"
+  },
+  "region": {
+    "sensitive": false,
+    "varName": "AWS_REGION"
+  },
+  "secret": {
+    "sensitive": true,
+    "varName": "AWS_SECRET_ACCESS_KEY"
+  },
+  "token": {
+    "sensitive": true,
+    "varName": "AWS_BEARER_TOKEN"
+  }
+}
+---
+
+[TestValidationResultStruct - 1]
+validation_result_examples
+[
+  {
+    "Valid": true,
+    "Errors": [],
+    "Warnings": []
+  },
+  {
+    "Valid": false,
+    "Errors": [
+      "API key is required"
+    ],
+    "Warnings": [
+      "Model pinning recommended"
+    ]
+  },
+  {
+    "Valid": false,
+    "Errors": [
+      "AWS_REGION is required",
+      "No authentication method provided"
+    ],
+    "Warnings": [
+      "SSO profile recommended over API keys"
+    ]
+  }
+]
+---

@@ -1,0 +1,887 @@
+
+[TestAnthropicProvider - 1]
+metadata
+{
+  "name": "anthropic",
+  "displayName": "Anthropic Direct API",
+  "description": "Use Claude directly through the Anthropic API",
+  "documentationURL": "https://docs.anthropic.com/",
+  "supportsModelPinning": false,
+  "requiredEnvVars": [
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "description": "Your Anthropic API key",
+      "sensitive": true
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "ANTHROPIC_BASE_URL",
+      "description": "Custom base URL for Anthropic API (optional)",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": null,
+  "modelSuggestions": null
+}
+---
+
+[TestAnthropicProvider - 2]
+generateEnv_valid
+{
+  "ANTHROPIC_API_KEY": "test-key"
+}
+---
+
+[TestAnthropicProvider - 3]
+generateEnv_with_baseurl
+{
+  "ANTHROPIC_API_KEY": "test-key",
+  "ANTHROPIC_BASE_URL": "https://custom.api.com"
+}
+---
+
+[TestAnthropicProvider - 4]
+validation_error
+ANTHROPIC_API_KEY is required
+---
+
+[TestBedrockProvider - 1]
+metadata
+{
+  "name": "bedrock",
+  "displayName": "Amazon Bedrock",
+  "description": "Use Claude through your AWS account with Amazon Bedrock",
+  "documentationURL": "https://docs.aws.amazon.com/bedrock/",
+  "supportsModelPinning": true,
+  "requiredEnvVars": [
+    {
+      "name": "CLAUDE_CODE_USE_BEDROCK",
+      "description": "Enable Bedrock mode",
+      "sensitive": false
+    },
+    {
+      "name": "AWS_REGION",
+      "description": "AWS region (e.g., us-east-1)",
+      "sensitive": false
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "AWS_PROFILE",
+      "description": "AWS SSO profile name (for SSO authentication)",
+      "sensitive": false
+    },
+    {
+      "name": "AWS_ACCESS_KEY_ID",
+      "description": "AWS access key ID (for API key authentication)",
+      "sensitive": true
+    },
+    {
+      "name": "AWS_SECRET_ACCESS_KEY",
+      "description": "AWS secret access key (for API key authentication)",
+      "sensitive": true
+    },
+    {
+      "name": "AWS_BEARER_TOKEN_BEDROCK",
+      "description": "AWS bearer token for Bedrock",
+      "sensitive": true
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "description": "Pinned Opus model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "description": "Pinned Sonnet model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "description": "Pinned Haiku model ID",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": {
+    "haiku": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "opus": "us.anthropic.claude-opus-4-6-v1",
+    "sonnet": "us.anthropic.claude-sonnet-4-6"
+  },
+  "modelSuggestions": {
+    "haiku": [
+      "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+    ],
+    "opus": [
+      "us.anthropic.claude-opus-4-6-v1",
+      "global.anthropic.claude-opus-4-6-v1"
+    ],
+    "sonnet": [
+      "us.anthropic.claude-sonnet-4-6",
+      "us.anthropic.claude-sonnet-4-5",
+      "global.anthropic.claude-sonnet-4-6"
+    ]
+  }
+}
+---
+
+[TestBedrockProvider - 2]
+generateEnv_sso
+{
+  "ANTHROPIC_DEFAULT_HAIKU_MODEL": "us.anthropic.claude-haiku-4-5",
+  "ANTHROPIC_DEFAULT_SONNET_MODEL": "us.anthropic.claude-sonnet-4-6",
+  "AWS_PROFILE": "my-sso-profile",
+  "AWS_REGION": "us-east-1",
+  "CLAUDE_CODE_USE_BEDROCK": "1"
+}
+---
+
+[TestBedrockProvider - 3]
+generateEnv_api_key
+{
+  "AWS_ACCESS_KEY_ID": "AKIAIOSFODNN7EXAMPLE",
+  "AWS_REGION": "us-west-2",
+  "AWS_SECRET_ACCESS_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+  "CLAUDE_CODE_USE_BEDROCK": "1"
+}
+---
+
+[TestBedrockProvider - 4]
+generateEnv_bearer
+{
+  "AWS_BEARER_TOKEN_BEDROCK": "test-bearer-token",
+  "AWS_REGION": "eu-west-1",
+  "CLAUDE_CODE_USE_BEDROCK": "1"
+}
+---
+
+[TestBedrockProvider - 5]
+validation_error
+AWS_REGION is required
+---
+
+[TestVertexProvider - 1]
+metadata
+{
+  "name": "vertex",
+  "displayName": "Google Vertex AI",
+  "description": "Use Claude through Google Cloud Platform with Vertex AI",
+  "documentationURL": "https://cloud.google.com/vertex-ai",
+  "supportsModelPinning": true,
+  "requiredEnvVars": [
+    {
+      "name": "CLAUDE_CODE_USE_VERTEX",
+      "description": "Enable Vertex AI mode",
+      "sensitive": false
+    },
+    {
+      "name": "CLOUD_ML_REGION",
+      "description": "GCP region (e.g., global, us-central1)",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_VERTEX_PROJECT_ID",
+      "description": "GCP project ID",
+      "sensitive": false
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "description": "Pinned Opus model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "description": "Pinned Sonnet model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "description": "Pinned Haiku model ID",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": {
+    "haiku": "claude-haiku-4-5@20251001",
+    "opus": "claude-opus-4-6",
+    "sonnet": "claude-sonnet-4-6"
+  },
+  "modelSuggestions": {
+    "haiku": [
+      "claude-haiku-4-5@20251001"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  }
+}
+---
+
+[TestVertexProvider - 2]
+generateEnv
+{
+  "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-3-5-sonnet-v2",
+  "ANTHROPIC_VERTEX_PROJECT_ID": "my-gcp-project",
+  "CLAUDE_CODE_USE_VERTEX": "1",
+  "CLOUD_ML_REGION": "global"
+}
+---
+
+[TestFoundryProvider - 1]
+metadata
+{
+  "name": "foundry",
+  "displayName": "Microsoft Foundry",
+  "description": "Use Claude through Microsoft Azure AI Foundry",
+  "documentationURL": "https://learn.microsoft.com/en-us/azure/ai-foundry/",
+  "supportsModelPinning": true,
+  "requiredEnvVars": [
+    {
+      "name": "CLAUDE_CODE_USE_FOUNDRY",
+      "description": "Enable Foundry mode",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_FOUNDRY_RESOURCE",
+      "description": "Azure AI Foundry resource name",
+      "sensitive": false
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "ANTHROPIC_FOUNDRY_API_KEY",
+      "description": "Azure AI Foundry API key",
+      "sensitive": true
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "description": "Pinned Opus model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "description": "Pinned Sonnet model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "description": "Pinned Haiku model ID",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": {
+    "haiku": "claude-haiku-4-5",
+    "opus": "claude-opus-4-6",
+    "sonnet": "claude-sonnet-4-6"
+  },
+  "modelSuggestions": {
+    "haiku": [
+      "claude-haiku-4-5"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  }
+}
+---
+
+[TestFireworksProvider - 1]
+metadata
+{
+  "name": "fireworks",
+  "displayName": "Fireworks AI",
+  "description": "Use Claude through Fireworks AI API",
+  "documentationURL": "https://docs.fireworks.ai/",
+  "supportsModelPinning": true,
+  "requiredEnvVars": [
+    {
+      "name": "ANTHROPIC_BASE_URL",
+      "description": "Fireworks API base URL",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "description": "Your Fireworks API key",
+      "sensitive": true
+    },
+    {
+      "name": "ANTHROPIC_MODEL",
+      "description": "Default model (all models must be the same for Fireworks)",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_SMALL_FAST_MODEL",
+      "description": "Small/fast model (same as ANTHROPIC_MODEL for Fireworks)",
+      "sensitive": false
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "description": "Pinned Sonnet model ID (same as main model)",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "description": "Pinned Haiku model ID (same as main model)",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "description": "Pinned Opus model ID (same as main model)",
+      "sensitive": false
+    },
+    {
+      "name": "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS",
+      "description": "Disable experimental betas",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": {
+    "default": "accounts/fireworks/models/kimi-k2p5",
+    "haiku": "accounts/fireworks/models/kimi-k2p5",
+    "opus": "accounts/fireworks/models/kimi-k2p5",
+    "sonnet": "accounts/fireworks/models/kimi-k2p5"
+  },
+  "modelSuggestions": {
+    "default": [
+      "accounts/fireworks/models/kimi-k2p5",
+      "accounts/fireworks/models/glm-5"
+    ],
+    "haiku": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ],
+    "opus": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ],
+    "sonnet": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ]
+  }
+}
+---
+
+[TestFireworksProvider - 2]
+generateEnv
+{
+  "ANTHROPIC_BASE_URL": "https://api.fireworks.ai/inference",
+  "ANTHROPIC_DEFAULT_HAIKU_MODEL": "accounts/fireworks/models/kimi-k2p5",
+  "ANTHROPIC_DEFAULT_OPUS_MODEL": "accounts/fireworks/models/kimi-k2p5",
+  "ANTHROPIC_DEFAULT_SONNET_MODEL": "accounts/fireworks/models/kimi-k2p5",
+  "ANTHROPIC_MODEL": "accounts/fireworks/models/kimi-k2p5",
+  "ANTHROPIC_SMALL_FAST_MODEL": "accounts/fireworks/models/kimi-k2p5",
+  "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1"
+}
+---
+
+[TestLiteLLMProvider - 1]
+metadata
+{
+  "name": "litellm",
+  "displayName": "LiteLLM Proxy",
+  "description": "Use Claude through a LiteLLM proxy server",
+  "documentationURL": "https://docs.litellm.ai/",
+  "supportsModelPinning": true,
+  "requiredEnvVars": [
+    {
+      "name": "ANTHROPIC_BASE_URL",
+      "description": "LiteLLM proxy base URL (e.g., http://localhost:4000)",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_AUTH_TOKEN",
+      "description": "LiteLLM proxy API key",
+      "sensitive": true
+    }
+  ],
+  "optionalEnvVars": [
+    {
+      "name": "ANTHROPIC_MODEL",
+      "description": "Default model",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+      "description": "Pinned Sonnet model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+      "description": "Pinned Haiku model ID",
+      "sensitive": false
+    },
+    {
+      "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+      "description": "Pinned Opus model ID",
+      "sensitive": false
+    }
+  ],
+  "defaultModels": {
+    "haiku": "claude-haiku-4-5",
+    "opus": "claude-opus-4-6",
+    "sonnet": "claude-sonnet-4-6"
+  },
+  "modelSuggestions": {
+    "haiku": [
+      "claude-haiku-4-5"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  }
+}
+---
+
+[TestProviderModelSuggestions - 1]
+{
+  "bedrock": {
+    "haiku": [
+      "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+    ],
+    "opus": [
+      "us.anthropic.claude-opus-4-6-v1",
+      "global.anthropic.claude-opus-4-6-v1"
+    ],
+    "sonnet": [
+      "us.anthropic.claude-sonnet-4-6",
+      "us.anthropic.claude-sonnet-4-5",
+      "global.anthropic.claude-sonnet-4-6"
+    ]
+  },
+  "fireworks": {
+    "default": [
+      "accounts/fireworks/models/kimi-k2p5",
+      "accounts/fireworks/models/glm-5"
+    ],
+    "haiku": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ],
+    "opus": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ],
+    "sonnet": [
+      "accounts/fireworks/models/kimi-k2p5"
+    ]
+  },
+  "foundry": {
+    "haiku": [
+      "claude-haiku-4-5"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  },
+  "litellm": {
+    "haiku": [
+      "claude-haiku-4-5"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  },
+  "vertex": {
+    "haiku": [
+      "claude-haiku-4-5@20251001"
+    ],
+    "opus": [
+      "claude-opus-4-6"
+    ],
+    "sonnet": [
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5"
+    ]
+  }
+}
+---
+
+[TestNewRegistry - 1]
+[
+  {
+    "name": "anthropic",
+    "displayName": "Anthropic Direct API",
+    "description": "Use Claude directly through the Anthropic API",
+    "documentationURL": "https://docs.anthropic.com/",
+    "supportsModelPinning": false,
+    "requiredEnvVars": [
+      {
+        "name": "ANTHROPIC_API_KEY",
+        "description": "Your Anthropic API key",
+        "sensitive": true
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "ANTHROPIC_BASE_URL",
+        "description": "Custom base URL for Anthropic API (optional)",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {},
+    "modelSuggestions": {}
+  },
+  {
+    "name": "bedrock",
+    "displayName": "Amazon Bedrock",
+    "description": "Use Claude through your AWS account with Amazon Bedrock",
+    "documentationURL": "https://docs.aws.amazon.com/bedrock/",
+    "supportsModelPinning": true,
+    "requiredEnvVars": [
+      {
+        "name": "CLAUDE_CODE_USE_BEDROCK",
+        "description": "Enable Bedrock mode",
+        "sensitive": false
+      },
+      {
+        "name": "AWS_REGION",
+        "description": "AWS region (e.g., us-east-1)",
+        "sensitive": false
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "AWS_PROFILE",
+        "description": "AWS SSO profile name (for SSO authentication)",
+        "sensitive": false
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "description": "AWS access key ID (for API key authentication)",
+        "sensitive": true
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "description": "AWS secret access key (for API key authentication)",
+        "sensitive": true
+      },
+      {
+        "name": "AWS_BEARER_TOKEN_BEDROCK",
+        "description": "AWS bearer token for Bedrock",
+        "sensitive": true
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "description": "Pinned Opus model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "description": "Pinned Sonnet model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "description": "Pinned Haiku model ID",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {
+      "haiku": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "opus": "us.anthropic.claude-opus-4-6-v1",
+      "sonnet": "us.anthropic.claude-sonnet-4-6"
+    },
+    "modelSuggestions": {
+      "haiku": [
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      ],
+      "opus": [
+        "us.anthropic.claude-opus-4-6-v1",
+        "global.anthropic.claude-opus-4-6-v1"
+      ],
+      "sonnet": [
+        "us.anthropic.claude-sonnet-4-6",
+        "us.anthropic.claude-sonnet-4-5",
+        "global.anthropic.claude-sonnet-4-6"
+      ]
+    }
+  },
+  {
+    "name": "fireworks",
+    "displayName": "Fireworks AI",
+    "description": "Use Claude through Fireworks AI API",
+    "documentationURL": "https://docs.fireworks.ai/",
+    "supportsModelPinning": true,
+    "requiredEnvVars": [
+      {
+        "name": "ANTHROPIC_BASE_URL",
+        "description": "Fireworks API base URL",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_API_KEY",
+        "description": "Your Fireworks API key",
+        "sensitive": true
+      },
+      {
+        "name": "ANTHROPIC_MODEL",
+        "description": "Default model (all models must be the same for Fireworks)",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_SMALL_FAST_MODEL",
+        "description": "Small/fast model (same as ANTHROPIC_MODEL for Fireworks)",
+        "sensitive": false
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "description": "Pinned Sonnet model ID (same as main model)",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "description": "Pinned Haiku model ID (same as main model)",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "description": "Pinned Opus model ID (same as main model)",
+        "sensitive": false
+      },
+      {
+        "name": "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS",
+        "description": "Disable experimental betas",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {
+      "default": "accounts/fireworks/models/kimi-k2p5",
+      "haiku": "accounts/fireworks/models/kimi-k2p5",
+      "opus": "accounts/fireworks/models/kimi-k2p5",
+      "sonnet": "accounts/fireworks/models/kimi-k2p5"
+    },
+    "modelSuggestions": {
+      "default": [
+        "accounts/fireworks/models/kimi-k2p5",
+        "accounts/fireworks/models/glm-5"
+      ],
+      "haiku": [
+        "accounts/fireworks/models/kimi-k2p5"
+      ],
+      "opus": [
+        "accounts/fireworks/models/kimi-k2p5"
+      ],
+      "sonnet": [
+        "accounts/fireworks/models/kimi-k2p5"
+      ]
+    }
+  },
+  {
+    "name": "foundry",
+    "displayName": "Microsoft Foundry",
+    "description": "Use Claude through Microsoft Azure AI Foundry",
+    "documentationURL": "https://learn.microsoft.com/en-us/azure/ai-foundry/",
+    "supportsModelPinning": true,
+    "requiredEnvVars": [
+      {
+        "name": "CLAUDE_CODE_USE_FOUNDRY",
+        "description": "Enable Foundry mode",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_FOUNDRY_RESOURCE",
+        "description": "Azure AI Foundry resource name",
+        "sensitive": false
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "ANTHROPIC_FOUNDRY_API_KEY",
+        "description": "Azure AI Foundry API key",
+        "sensitive": true
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "description": "Pinned Opus model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "description": "Pinned Sonnet model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "description": "Pinned Haiku model ID",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {
+      "haiku": "claude-haiku-4-5",
+      "opus": "claude-opus-4-6",
+      "sonnet": "claude-sonnet-4-6"
+    },
+    "modelSuggestions": {
+      "haiku": [
+        "claude-haiku-4-5"
+      ],
+      "opus": [
+        "claude-opus-4-6"
+      ],
+      "sonnet": [
+        "claude-sonnet-4-6",
+        "claude-sonnet-4-5"
+      ]
+    }
+  },
+  {
+    "name": "litellm",
+    "displayName": "LiteLLM Proxy",
+    "description": "Use Claude through a LiteLLM proxy server",
+    "documentationURL": "https://docs.litellm.ai/",
+    "supportsModelPinning": true,
+    "requiredEnvVars": [
+      {
+        "name": "ANTHROPIC_BASE_URL",
+        "description": "LiteLLM proxy base URL (e.g., http://localhost:4000)",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_AUTH_TOKEN",
+        "description": "LiteLLM proxy API key",
+        "sensitive": true
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "ANTHROPIC_MODEL",
+        "description": "Default model",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "description": "Pinned Sonnet model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "description": "Pinned Haiku model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "description": "Pinned Opus model ID",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {
+      "haiku": "claude-haiku-4-5",
+      "opus": "claude-opus-4-6",
+      "sonnet": "claude-sonnet-4-6"
+    },
+    "modelSuggestions": {
+      "haiku": [
+        "claude-haiku-4-5"
+      ],
+      "opus": [
+        "claude-opus-4-6"
+      ],
+      "sonnet": [
+        "claude-sonnet-4-6",
+        "claude-sonnet-4-5"
+      ]
+    }
+  },
+  {
+    "name": "vertex",
+    "displayName": "Google Vertex AI",
+    "description": "Use Claude through Google Cloud Platform with Vertex AI",
+    "documentationURL": "https://cloud.google.com/vertex-ai",
+    "supportsModelPinning": true,
+    "requiredEnvVars": [
+      {
+        "name": "CLAUDE_CODE_USE_VERTEX",
+        "description": "Enable Vertex AI mode",
+        "sensitive": false
+      },
+      {
+        "name": "CLOUD_ML_REGION",
+        "description": "GCP region (e.g., global, us-central1)",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_VERTEX_PROJECT_ID",
+        "description": "GCP project ID",
+        "sensitive": false
+      }
+    ],
+    "optionalEnvVars": [
+      {
+        "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "description": "Pinned Opus model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "description": "Pinned Sonnet model ID",
+        "sensitive": false
+      },
+      {
+        "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "description": "Pinned Haiku model ID",
+        "sensitive": false
+      }
+    ],
+    "defaultModels": {
+      "haiku": "claude-haiku-4-5@20251001",
+      "opus": "claude-opus-4-6",
+      "sonnet": "claude-sonnet-4-6"
+    },
+    "modelSuggestions": {
+      "haiku": [
+        "claude-haiku-4-5@20251001"
+      ],
+      "opus": [
+        "claude-opus-4-6"
+      ],
+      "sonnet": [
+        "claude-sonnet-4-6",
+        "claude-sonnet-4-5"
+      ]
+    }
+  }
+]
+---
+
+[TestFoundryProvider - 2]
+generateEnv
+{
+  "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-sonnet-4-6",
+  "ANTHROPIC_FOUNDRY_API_KEY": "my-api-key",
+  "ANTHROPIC_FOUNDRY_RESOURCE": "my-foundry-resource",
+  "CLAUDE_CODE_USE_FOUNDRY": "1"
+}
+---
+
+[TestLiteLLMProvider - 2]
+generateEnv
+{
+  "ANTHROPIC_AUTH_TOKEN": "sk-test-token",
+  "ANTHROPIC_BASE_URL": "http://localhost:4000",
+  "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+}
+---

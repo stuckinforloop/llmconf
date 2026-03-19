@@ -1,0 +1,49 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.html
+
+# Build directories
+bin/
+dist/
+build/
+
+# Dependency directories
+vendor/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Local configuration
+*.local.json
+.env
+.env.local
+
+# Claude Code settings (may contain secrets)
+.claude/
+
+# Project specific
+llmconf
+*.tar.gz
+*.zip
+
+# Snapshot files should be committed to version control
+# go-snaps stores snapshots in __snapshots__ directories
+# DO NOT ignore: **/__snapshots__/*.snap
