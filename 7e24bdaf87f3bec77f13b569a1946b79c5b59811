@@ -1,0 +1,23 @@
+.github/workflows/release.yml
+  c6b2998ab567d3af 16,20,23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "7e24bdaf87f3bec77f13b569a1946b79c5b59811",
+  "prompts": {
+    "c6b2998ab567d3af": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "01995061-94c0-4a5b-9176-6dea40469669",
+        "model": "gpt-5.3-codex-xhigh-fast"
+      },
+      "human_author": "stuckinforloop <device.neel@gmail.com>",
+      "messages": [],
+      "total_additions": 3,
+      "total_deletions": 3,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    }
+  }
+}
