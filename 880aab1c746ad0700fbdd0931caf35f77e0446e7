@@ -1,0 +1,31 @@
+main.go
+  1682df9088d7f238 1-15
+README.md
+  1682df9088d7f238 15-16,19-24,26-27,29-41
+.goreleaser.yml
+  1682df9088d7f238 1-77
+Makefile
+  1682df9088d7f238 33,40-44
+.github/workflows/release.yml
+  1682df9088d7f238 1-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "880aab1c746ad0700fbdd0931caf35f77e0446e7",
+  "prompts": {
+    "1682df9088d7f238": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d0db8474-db6c-480f-8041-871d7930a1a5",
+        "model": "accounts/fireworks/models/kimi-k2p5"
+      },
+      "human_author": "stuckinforloop <device.neel@gmail.com>",
+      "messages": [],
+      "total_additions": 152,
+      "total_deletions": 10,
+      "accepted_lines": 151,
+      "overriden_lines": 0
+    }
+  }
+}
